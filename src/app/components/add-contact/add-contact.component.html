@@ -1,0 +1,71 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="fullName"
+          required
+          [(ngModel)]="contact.fullName"
+          name="fullName"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="mobileNumber">Mobile Number</label>
+        <input
+          type="number"
+          class="form-control"
+          id="mobileNumber"
+          min="0"
+          required
+          [(ngModel)]="contact.mobileNumber"
+          name="mobileNumber"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="dateOfBirth">Date Of Birth</label>
+        <input
+          type="date"
+          class="form-control"
+          id="dateOfBirth"
+          [(ngModel)]="contact.dateOfBirth"
+          name="dateOfBirth"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="city">City</label>
+        <input
+          type="text"
+          class="form-control"
+          name="city"
+          id="city"
+          [ngModel]="contact.address?.city"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="postalCode">Postal Code</label>
+        <input
+          type="number"
+          class="form-control"
+          id="postalCode"
+          name="postalCode"
+          [ngModel]="contact.address?.postalCode"
+        />
+      </div>
+
+      <button (click)="saveContact()" class="btn btn-success">Submit</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Contact was saved successfully!</h4>
+      <button class="btn btn-success" (click)="newContact()">Add</button>
+    </div>
+  </div>
+</div>
