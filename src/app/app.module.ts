@@ -6,7 +6,7 @@ import {AddContactComponent} from './components/add-contact/add-contact.componen
 import {ContactDetailsComponent} from './components/contact-details/contact-details.component';
 import {ContactsListComponent} from './components/contacts-list/contacts-list.component';
 import {AppRoutingModule} from './app-routing.module';
-import {RouterLinkWithHref, RouterOutlet} from "@angular/router";
+import {RouterLinkWithHref, RouterModule, RouterOutlet} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 
@@ -23,7 +23,8 @@ import {HttpClientModule} from "@angular/common/http";
     RouterOutlet,
     RouterLinkWithHref,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

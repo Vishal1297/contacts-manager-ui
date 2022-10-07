@@ -36,12 +36,12 @@ export class AddContactComponent implements OnInit {
     console.log('Reset form ::')
     this.contact = {
       uuid: null,
-      fullName: '',
+      fullName: null,
       dateOfBirth: 0,
       mobileNumber: 0,
       address: {
         uuid: null,
-        city: '',
+        city: null,
         postalCode: 0
       }
     }
