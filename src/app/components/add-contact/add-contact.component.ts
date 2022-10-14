@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Contact} from "../../models/models";
+import { Contact } from "../../models/models";
+import { ContactsService } from '../../services/contacts.service';
 
 @Component({
   selector: 'app-add-contact',
@@ -13,7 +14,7 @@ export class AddContactComponent implements OnInit {
   contact: Contact = {
     uuid: null,
     fullName: '',
-    dateOfBirth: null,
+    dateOfBirth: Date.now(),
     mobileNumber: null,
     address: {
       uuid: null,
@@ -22,14 +23,35 @@ export class AddContactComponent implements OnInit {
     }
   }
 
-  constructor() {
+  constructor(private contactService: ContactsService) {
   }
 
   ngOnInit(): void {
   }
 
   saveContact(): void {
-    console.log('Save contact ::')
+    const toSave = {
+      fullName: this.contact.fullName,
+      dateOfBirth: this.contact.dateOfBirth ? new Date(this.contact.dateOfBirth).getTime() : Date.now(),
+      mobileNumber: this.contact.mobileNumber,
+      address: {
+        city: this.contact.address?.city,
+        postalCode: this.contact.address?.postalCode
+      }
+    }
+
+    console.log('Save contact ::', toSave);
+
+    this.contactService.create(toSave).subscribe(
+      res => {
+        console.log('saved response', res);
+        this.submitted = true;
+      },
+      err => {
+        console.log('Error on save', err);
+      }
+    )
+
   }
 
   newContact(): void {
