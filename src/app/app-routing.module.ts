@@ -6,7 +6,7 @@ import {ContactDetailsComponent} from "./components/contact-details/contact-deta
 import {AddContactComponent} from "./components/add-contact/add-contact.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
+  { path: '', redirectTo: 'contacts', pathMatch: 'full' },
   { path: 'contacts', component: ContactsListComponent },
   { path: 'contact/:id', component: ContactDetailsComponent },
   { path: 'add', component: AddContactComponent }

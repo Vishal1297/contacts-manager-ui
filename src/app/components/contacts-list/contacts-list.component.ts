@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { pluck } from 'rxjs';
 import { Contact } from 'src/app/models/models';
 import { ContactsService } from 'src/app/services/contacts.service';
 
@@ -12,62 +13,58 @@ export class ContactsListComponent implements OnInit {
   contacts?: Contact[];
   currContact?: Contact;
   currentIndex = -1;
-  title = '';
+  fullName = '';
 
   constructor(private contactsService: ContactsService) { }
 
   ngOnInit(): void {
-    this.retrieveTutorials();
+    this.fetchAllContacts();
   }
 
-  retrieveTutorials(): void {
+  fetchAllContacts(): void {
     this.contactsService.getAll()
-      .subscribe(
-        data => {
-          this.contacts = data;
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        });
+      .pipe(pluck('data'))
+      .subscribe((res: any) => {
+        this.contacts = res;
+      });
   }
 
   refreshList(): void {
-    this.retrieveTutorials();
+    this.fetchAllContacts();
     this.currContact = undefined;
     this.currentIndex = -1;
   }
 
-  setActiveTutorial(contact: Contact, index: number): void {
+  setActiveContact(contact: Contact, index: number): void {
+    console.log('set active : ', contact.fullName);
+
     this.currContact = contact;
     this.currentIndex = index;
   }
 
-  removeAllTutorials(): void {
-    // this.contactsService.deleteAll()
-    //   .subscribe(
-    //     response => {
-    //       console.log(response);
-    //       this.refreshList();
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     });
+  removeAllContacts(): void {
+    this.contactsService.deleteAll()
+      .subscribe(
+        response => {
+          this.refreshList();
+        },
+        error => {
+          console.log('Error while remove all contacts :', error);
+        });
   }
 
-  searchTitle(): void {
+  searchByFullName(): void {
     this.currContact = undefined;
     this.currentIndex = -1;
 
-    // this.tutorialService.findByTitle(this.title)
-    //   .subscribe(
-    //     data => {
-    //       this.tutorials = data;
-    //       console.log(data);
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     });
+    this.contactsService.searchByFullName(this.fullName)
+      .subscribe(
+        data => {
+          this.contacts = data;
+        },
+        error => {
+          console.log('Error on search by fullName :', error);
+        });
   }
 
 }

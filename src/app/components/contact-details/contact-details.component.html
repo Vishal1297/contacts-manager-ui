@@ -1,1 +1,52 @@
-<p>contact-details works!</p>
+<div>
+  <div *ngIf="currContact.uuid" class="edit-form">
+    <h4>Contact</h4>
+    <form>
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input
+          type="text"
+          class="form-control mb-4"
+          id="fullName"
+          [(ngModel)]="currContact.fullName"
+          name="fullName"
+        />
+      </div>
+      <div class="form-group">
+        <label for="mobileNumber">Mobile Number</label>
+        <input
+          type="text"
+          class="form-control mb-4"
+          id="mobileNumber"
+          [(ngModel)]="currContact.mobileNumber"
+          name="mobileNumber"
+        />
+      </div>
+      <div class="form-group">
+        <label for="dateOfBirth">Date Of Birth</label>
+        <input
+          type="date"
+          class="form-control"
+          id="dateOfBirth"
+          [(ngModel)]="currContact.dateOfBirth"
+          name="dateOfBirth"
+        />
+      </div>
+    </form>
+
+    <button class="badge-danger mb-4" (click)="deleteContact()">
+      Delete
+    </button>
+
+    <button type="submit" class="badge-success mb-4" (click)="updateContact()">
+      Update
+    </button>
+
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currContact.uuid">
+    <br />
+    <p>Cannot access this contact.</p>
+  </div>
+</div>

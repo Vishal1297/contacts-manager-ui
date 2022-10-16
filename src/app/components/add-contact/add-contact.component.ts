@@ -12,12 +12,12 @@ export class AddContactComponent implements OnInit {
   submitted: boolean = false;
 
   contact: Contact = {
-    uuid: null,
+    uuid: '',
     fullName: '',
     dateOfBirth: Date.now(),
-    mobileNumber: null,
+    mobileNumber: '',
     address: {
-      uuid: null,
+      uuid: '',
       city: '',
       postalCode: 0
     }
@@ -42,7 +42,7 @@ export class AddContactComponent implements OnInit {
 
     console.log('Save contact ::', toSave);
 
-    this.contactService.create(toSave).subscribe(
+    this.contactService.createOrUpdate(toSave).subscribe(
       res => {
         console.log('saved response', res);
         this.submitted = true;
@@ -57,13 +57,13 @@ export class AddContactComponent implements OnInit {
   newContact(): void {
     console.log('Reset form ::')
     this.contact = {
-      uuid: null,
-      fullName: null,
+      uuid: '',
+      fullName: '',
       dateOfBirth: 0,
-      mobileNumber: 0,
+      mobileNumber: '',
       address: {
-        uuid: null,
-        city: null,
+        uuid: '',
+        city: '',
         postalCode: 0
       }
     }

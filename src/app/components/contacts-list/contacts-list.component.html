@@ -1,63 +1,68 @@
 <div class="list row">
   <div class="col-md-8">
     <div class="input-group mb-3">
+      
       <input
         type="text"
         class="form-control"
-        placeholder="Search by title"
-        [(ngModel)]="title"
+        placeholder="Search by full name"
+        [(ngModel)]="fullName"
       />
+
       <div class="input-group-append">
         <button
           class="btn btn-outline-secondary"
           type="button"
-          (click)="searchTitle()"
+          (click)="searchByFullName()"
         >
-          Search
+          Search Contact
         </button>
       </div>
+
     </div>
   </div>
   <div class="col-md-6">
-    <h4>Tutorials List</h4>
+    <h4>Contacts List</h4>
     <ul class="list-group">
       <li
         class="list-group-item"
         *ngFor="let contact of contacts; let i = index"
         [class.active]="i == currentIndex"
-        (click)="setActiveTutorial(contact, i)"
+        (click)="setActiveContact(contact, i)"
       >
         {{ contact.fullName }}
       </li>
     </ul>
 
-    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTutorials()">
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllContacts()">
       Remove All
     </button>
+
   </div>
+
   <div class="col-md-6">
     <div *ngIf="currContact">
-      <h4>Tutorial</h4>
+      <h4>Contact</h4>
       <div>
-        <label><strong>Title:</strong></label> {{ currContact.fullName }}
+        <label><strong>Full Name :</strong></label> {{ currContact.fullName }}
       </div>
       <div>
-        <label><strong>Description:</strong></label>
+        <label><strong>Mobile Number :</strong></label>
         {{ currContact.mobileNumber }}
       </div>
-      <!-- <div>
-        <label><strong>Status:</strong></label>
-        {{ currentTutorial.published ? "Published" : "Pending" }}
-      </div> -->
+      <div>
+        <label><strong>Date Of Birth :</strong></label>
+        {{ currContact.dateOfBirth | date }}
+      </div>
 
-      <a class="badge-warning" routerLink="/tutorials/{{ currContact.uuid }}">
+      <a class="badge-warning" routerLink="/contact/{{ currContact.uuid }}">
         Edit
       </a>
     </div>
 
     <div *ngIf="!currContact">
       <br />
-      <p>Please click on a Tutorial...</p>
+      <p>Please click on a Contact</p>
     </div>
   </div>
 </div>

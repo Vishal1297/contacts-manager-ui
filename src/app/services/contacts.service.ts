@@ -17,19 +17,23 @@ export class ContactsService {
   }
 
   get(id: string): Observable<Contact> {
-    return this.http.get(`${baseUrl}/${id}`);
+    return this.http.get(`${baseUrl}/contact/${id}`);
   }
 
-  create(data: Contact): Observable<Contact> {
+  createOrUpdate(data: Contact): Observable<Contact> {
     return this.http.post(`${baseUrl}/contact`, data);
   }
 
-  update(data: Contact): Observable<Contact> {
-    return this.http.put(`${baseUrl}/contact`, data);
+  delete(id: string): Observable<Contact> {
+    return this.http.delete(`${baseUrl}/contact/${id}`);
   }
 
-  delete(id: string): Observable<Contact> {
-    return this.http.delete(`${baseUrl}/contact`);
+  deleteAll(): Observable<Contact> {
+    return this.http.delete(`${baseUrl}/contacts/all`);
+  }
+
+  searchByFullName(name: string): Observable<Contact[]> {
+    return this.http.get<Contact[]>(`${baseUrl}/contacts/name/${name}`);
   }
 
 }
