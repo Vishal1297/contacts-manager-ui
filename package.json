@@ -5,12 +5,12 @@
   "author": {
     "name": "Vishal Yadav"
   },
-  "description": "A contacts manager UI application",
+  "description": "A contacts manager ui app",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "watch": "ng build --watch --configuration production",
     "test": "ng test"
   },
   "private": true,
