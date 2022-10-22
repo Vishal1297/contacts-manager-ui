@@ -8,7 +8,7 @@
   "description": "A contacts manager ui app",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --configuration production",
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration production",
     "test": "ng test"

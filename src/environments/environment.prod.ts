@@ -1,5 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  BASE_URL: 'http://192.168.59.103:30958/contact/v1'
 };
-
-export const BASE_URL = 'http://localhost:8080/contact/v1'
