@@ -5,7 +5,7 @@
   "author": {
     "name": "Vishal Yadav"
   },
-  "description": "A contacts manager ui app",
+  "description": "A contacts manager angular app",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --configuration production",
