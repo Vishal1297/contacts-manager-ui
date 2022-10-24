@@ -56,9 +56,17 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ]
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "test"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -68,9 +76,12 @@
             },
             "development": {
               "browserTarget": "contacts-manager-ui:build:development"
+            },
+            "test": {
+              "browserTarget": "contacts-manager-ui:build:test"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "test"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -98,6 +109,7 @@
       }
     }
   },
+  "defaultProject": "contacts-manager-ui",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
