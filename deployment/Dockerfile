@@ -1,11 +1,12 @@
-FROM nginx:1.13.8-alpine
+FROM nginx:1.14.2-alpine
 
-RUN rm -rf /usr/share/nginx/html/*
-
-COPY nginx.conf /etc/nginx/conf.d/nginx.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
 COPY dist /usr/share/nginx/html
 
-EXPOSE 8080
+RUN chown root /usr/share/nginx/html/*
+RUN chmod 755 /usr/share/nginx/html/*
+
+EXPOSE 80
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
