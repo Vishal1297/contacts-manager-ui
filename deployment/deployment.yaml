@@ -1,38 +1,41 @@
-apiVersion: apps/v1             # API version
-kind: Deployment                # Type of kubernetes resource
-metadata:
-  name: contacts-manager-ui-app      # Name of the kubernetes resource
+apiVersion: v1 # Kubernetes API version
+kind: Service # Kubernetes resource kind we are creating
+metadata: # Metadata of the resource kind we are creating
+  name: contacts-manager-ui-service
 spec:
-  replicas: 1                   # No of replicas/pods to run
-  selector:                     
-    matchLabels:                # This deployment applies to Pods matching the specified labels
-      app: contacts-manager-ui-app
-  template:                     # Template for creating the Pods in this deployment
-    metadata:
-      labels:                   # Labels that will be applied to all the Pods in this deployment
-        app: contacts-manager-ui-app
-    spec:                       # Spec for the containers that will run inside the Pods
-      containers:
-      - name: contacts-manager-ui-app
-        image: ivishalyadav/contacts-manager-ui
-        imagePullPolicy: Always
-        ports:
-          - name: http
-            containerPort: 80   # Should match the Port that the container listens on
-        resources:
-          limits:
-            cpu: 0.2
-            memory: "10Mi"
----
-apiVersion: v1                  # API version
-kind: Service                   # Type of kubernetes resource
-metadata:
-  name: contacts-manager-ui-service      # Name of the kubernetes resource
-spec:
-  type: NodePort                # Exposes the service by opening a port on each node
+  type: NodePort
   selector:
-    app: contacts-manager-ui-app     # Any Pod matching the label `app=contacts-manager-ui-app` will be picked up by this service
-  ports:                        # Forward incoming connections on port 8081 to the target port 80 in the Pod
-  - name: http
-    port: 8081
-    targetPort: 80
+    app: contacts-manager-ui-app
+  ports:
+    - protocol: "TCP"
+      port: 8080 # The port that the service is running on in the cluster
+      targetPort: 8080 # The port exposed by the service
+---
+apiVersion: apps/v1
+kind: Deployment # Kubernetes resource kind we are creating
+metadata:
+  name: contacts-manager-ui-app
+spec:
+  selector:
+    matchLabels:
+      app: contacts-manager-ui-app
+  replicas: 1 # Number of replicas that will be created for this deployment
+  template:
+    metadata:
+      labels:
+        app: contacts-manager-ui-app
+    spec:
+      containers:
+        - name: contacts-manager-ui-app
+          image: ivishalyadav/contacts-manager-ui # Image that will be used to containers in the cluster
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080 # The port that the container is running on in the cluster
+          resources:
+            limits:
+              cpu: 300m
+              memory: 500Mi
+            requests:
+              cpu: 100m
+              memory: 200Mi
+---

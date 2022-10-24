@@ -108,15 +108,5 @@
         }
       }
     }
-  },
-  "defaultProject": "contacts-manager-ui",
-  "schematics": {
-    "@schematics/angular:component": {
-      "prefix": "app",
-      "style": "css"
-    },
-    "@schematics/angular:directive": {
-      "prefix": "app"
-    }
   }
 }
