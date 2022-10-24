@@ -21,8 +21,6 @@ export class ContactsListComponent implements OnInit {
     this.fetchAllContacts();
   }
 
-  // TODO: Success/Failure handling on api calls
-
   fetchAllContacts(): void {
     this.contactsService.getAll()
       .pipe(pluck('data'))

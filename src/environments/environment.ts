@@ -3,8 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  BASE_URL: 'http://localhost:8080/contact/v1'
+  production: false
 };
 
 /*
@@ -15,3 +14,6 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+
+
+export const BASE_URL = 'http://localhost:8080/contact/v1'
